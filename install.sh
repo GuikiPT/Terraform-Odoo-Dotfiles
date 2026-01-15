@@ -51,8 +51,32 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     sudo chsh -s "$(which zsh)" "$USER"
 fi
 
-# Install VS Code extensions if code-server is available
+# Install VS Code configuration and extensions if code-server is available
 if command -v code-server &> /dev/null; then
+    echo "Setting up VS Code configuration..."
+
+    # Determine workspace directory (Coder typically uses /workspace or /home/coder/workspace)
+    WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace}"
+    if [ ! -d "$WORKSPACE_DIR" ]; then
+        WORKSPACE_DIR="/home/coder/workspace"
+    fi
+    if [ ! -d "$WORKSPACE_DIR" ]; then
+        WORKSPACE_DIR="$HOME/workspace"
+    fi
+
+    # Create .vscode directory in workspace if it doesn't exist
+    if [ -d "$WORKSPACE_DIR" ]; then
+        mkdir -p "$WORKSPACE_DIR/.vscode"
+
+        # Copy VS Code settings to workspace
+        echo "Copying VS Code settings to $WORKSPACE_DIR/.vscode..."
+        cp -f "$SCRIPT_DIR/.vscode/settings.json" "$WORKSPACE_DIR/.vscode/settings.json"
+        cp -f "$SCRIPT_DIR/.vscode/extensions.json" "$WORKSPACE_DIR/.vscode/extensions.json"
+    else
+        echo "Warning: Could not find workspace directory. VS Code settings not copied."
+    fi
+
+    # Install extensions
     echo "Installing VS Code extensions..."
     "$SCRIPT_DIR/vscode/install-extensions.sh"
 fi
