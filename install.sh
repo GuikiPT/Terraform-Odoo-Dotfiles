@@ -51,5 +51,11 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     sudo chsh -s "$(which zsh)" "$USER"
 fi
 
+# Install VS Code extensions if code-server is available
+if command -v code-server &> /dev/null; then
+    echo "Installing VS Code extensions..."
+    "$SCRIPT_DIR/vscode/install-extensions.sh"
+fi
+
 echo "Powerlevel10k installation complete!"
 echo "Please restart your shell or run: exec zsh"

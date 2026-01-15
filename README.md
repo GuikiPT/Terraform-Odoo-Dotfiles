@@ -1,25 +1,35 @@
 # Coder Workspace Dotfiles
 
-This repository contains dotfiles for Coder workspaces with Powerlevel10k theme.
+This repository contains dotfiles for Coder workspaces with Powerlevel10k theme and VS Code configuration.
 
 ## Structure
 
 ```plaintext
 .
-├── .p10k.zsh
-├── .zshrc
-└── install.sh
+├── install.sh              # Main installation script
+├── shell/                  # Shell configurations
+│   ├── zshrc              # Zsh configuration
+│   └── p10k.zsh           # Powerlevel10k theme configuration
+├── vscode/                 # VS Code configurations
+│   └── install-extensions.sh  # VS Code extension installer
+├── .vscode/                # VS Code workspace settings
+│   ├── extensions.json    # Recommended extensions
+│   └── settings.json      # Workspace settings
+└── README.md              # This file
 ```
-
-- **.p10k.zsh**: Powerlevel10k configuration file
-- **.zshrc**: Zsh configuration file
-- **install.sh**: Installation script
 
 ## What's Included
 
+### Shell Configuration
 - **Oh My Zsh**: Popular zsh framework
 - **Powerlevel10k**: Fast and customizable zsh theme
-- **Pre-configured plugins**: git, docker, kubectl, terraform, and more
+- **Plugins**: git, zsh-autosuggestions, zsh-syntax-highlighting, and more
+- **Key bindings**: Full support for Alt/Ctrl + arrow keys, Home/End, Delete, etc.
+
+### VS Code Configuration
+- **Recommended extensions**: GitLens, Python, Docker, Terraform, and more
+- **Workspace settings**: Pre-configured editor, terminal, and language-specific settings
+- **Automatic installation**: Extensions are installed automatically when using code-server
 
 ## Installation
 
@@ -37,9 +47,15 @@ exec zsh
 
 ## Customization
 
-- Edit `.zshrc` to add more plugins or change settings
+### Shell
+- Edit `shell/zshrc` to add more plugins or change settings
 - Run `p10k configure` to reconfigure Powerlevel10k interactively
-- Edit `.p10k.zsh` directly for advanced customization
+- Edit `shell/p10k.zsh` directly for advanced customization
+
+### VS Code
+- Edit `.vscode/extensions.json` to add/remove recommended extensions
+- Edit `.vscode/settings.json` to customize workspace settings
+- Edit `vscode/install-extensions.sh` to modify which extensions are auto-installed
 
 ## Using with Coder
 
